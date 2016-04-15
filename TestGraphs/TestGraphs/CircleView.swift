@@ -29,7 +29,7 @@ class CircleView: UIView {
             let floatWidth = CGFloat(lineWidth)
             fullLayer.lineWidth = floatWidth
             loadedLayer.lineWidth = floatWidth
-            lineViewHeight.constant = floatWidth
+            lineViewHeight.constant = floatWidth*1.1
             layoutIfNeeded()
         }
     }
@@ -99,7 +99,7 @@ class CircleView: UIView {
     
     var colorLayerAnimation: CABasicAnimation {
         let animation = basicAnimation
-        animation.keyPath = "strokeAnimation"
+        animation.keyPath = "strokeColor"
         animation.fromValue = loadedLayer.strokeColor
         animation.toValue = fillLineColor
         return animation

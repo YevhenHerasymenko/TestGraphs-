@@ -18,7 +18,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gyS-6C-9qY">
-                    <rect key="frame" x="299" y="0.0" width="3" height="20"/>
+                    <rect key="frame" x="299" y="-1" width="3" height="20"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="20" id="Wbh-RL-fYt"/>
@@ -28,7 +28,7 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="gyS-6C-9qY" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Voo-6s-gqT"/>
+                <constraint firstItem="gyS-6C-9qY" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="-1" id="Voo-6s-gqT"/>
                 <constraint firstItem="gyS-6C-9qY" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="qIk-bP-Kfo"/>
             </constraints>
         </view>

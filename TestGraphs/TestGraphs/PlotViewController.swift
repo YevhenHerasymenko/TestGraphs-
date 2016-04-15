@@ -40,6 +40,7 @@ class PlotViewController: UIViewController {
         let set = LineChartDataSet(yVals: yVals, label: "")
         set.colors = [UIColor.clearColor()]
         set.drawCirclesEnabled = false
+        set.drawValuesEnabled = false
         
         let gradientColors = [UIColor.grayColor().CGColor, UIColor.grayColor().CGColor, UIColor.redColor().CGColor, UIColor.redColor().CGColor]
         let gradient = CGGradientCreateWithColors(nil, gradientColors, [0.49, 0.495, 0.5, 1.0])
