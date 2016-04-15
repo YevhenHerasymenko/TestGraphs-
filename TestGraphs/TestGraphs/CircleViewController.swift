@@ -10,26 +10,18 @@ import UIKit
 
 class CircleViewController: UIViewController {
 
+    @IBOutlet var circleView: CircleView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    @IBAction func animation(sender: AnyObject) {
+        circleView.loadedState = 0.9
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    @IBAction func animationMinus(sender: AnyObject) {
+        circleView.loadedState = 0.1
     }
-    */
-
 }

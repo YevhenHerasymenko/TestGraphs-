@@ -9,57 +9,191 @@
 import UIKit
 
 class CircleView: UIView {
+    
+    @IBInspectable var strokeFullColor: UIColor! {
+        didSet {
+            let color = strokeFullColor.CGColor
+            self.leftPartFullLayer.strokeColor = color
+            self.rightPartFullLayer.strokeColor = color
+        }
+    }
+    
+    @IBInspectable var strokeLessLoadedColor: UIColor!
+    
+    @IBInspectable var strokeFullLoadedColor: UIColor!
+    
+    @IBInspectable var lineWidth: NSNumber! {
+        didSet {
+            let floatWidth = CGFloat(lineWidth)
+            self.leftPartFullLayer.lineWidth = floatWidth
+            self.leftPartLoadedLayer.lineWidth = floatWidth
+            self.rightPartFullLayer.lineWidth = floatWidth
+            self.rightPartLoadedLayer.lineWidth = floatWidth
+        }
+    }
+    
+    let whiteSpaceWidth = 2
+    
+    private var leftLoadedState: CGFloat = 0
+    private var rightLoadedState: CGFloat = 0
+    
+    var loadedState: CGFloat {
+        get {
+            return (leftLoadedState + rightLoadedState)/2
+        }
+        set {
+            leftLoadedState = newValue > 0.5 ? 1 : newValue*2
+            rightLoadedState = newValue < 0.5 ? 0 : (newValue-0.5)*2
+            loadedState > 0.5 ? leftBlockAnimation() : rightBlockAnimation()
+        }
+        
+        
+    }
+    
+    var fillLineColor: CGColor {
+        guard loadedState > 0 else {
+            return UIColor.clearColor().CGColor
+        }
+        return loadedState > 0.7 ? strokeFullLoadedColor.CGColor : strokeLessLoadedColor.CGColor
+    }
 
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        circleLayerSetup()
+    lazy var leftPartFullLayer: CAShapeLayer =  {
+        let layer = self.shapeLayer
+        self.layer.addSublayer(layer)
+        layer.path = self.leftPath
+        layer.strokeEnd = 1
+        return layer
+    }()
+    
+    lazy var rightPartFullLayer: CAShapeLayer =  {
+        let layer = self.shapeLayer
+        self.layer.addSublayer(layer)
+        layer.path = self.rightPath
+        layer.strokeEnd = 1
+        return layer
+    }()
+    
+    lazy var leftPartLoadedLayer: CAShapeLayer =  {
+        let layer = self.shapeLayer
+        self.layer.addSublayer(layer)
+        layer.path = self.leftPath
+        layer.strokeEnd = 0
+        return layer
+    }()
+    
+    lazy var rightPartLoadedLayer: CAShapeLayer =  {
+        let layer = self.shapeLayer
+        self.layer.addSublayer(layer)
+        layer.path = self.rightPath
+        layer.strokeEnd = 0
+        return layer
+    }()
+    
+    var shapeLayer: CAShapeLayer {
+        let layer = CAShapeLayer()
+        layer.fillColor = UIColor.clearColor().CGColor
+        layer.strokeColor = fillLineColor
+        layer.strokeStart = 0
+        return layer
+    }
+
+    var leftPath: CGPath {
+        let path = UIBezierPath(arcCenter:CGPointMake(self.bounds.midX - CGFloat(whiteSpaceWidth)/2,self.bounds.maxY), radius:self.bounds.height - CGFloat(lineWidth)/2, startAngle: CGFloat(M_PI), endAngle:CGFloat(-M_PI_2), clockwise: true)
+        return path.CGPath
     }
     
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        circleLayerSetup()
+    var rightPath: CGPath {
+        let path = UIBezierPath(arcCenter:CGPointMake(self.bounds.midX + CGFloat(whiteSpaceWidth)/2,self.bounds.maxY), radius:self.bounds.height - CGFloat(lineWidth)/2, startAngle: CGFloat(-M_PI_2), endAngle:0, clockwise: true)
+        return path.CGPath
     }
     
+    var basicAnimation: CABasicAnimation {
+        let animation = CABasicAnimation()
+        animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
+        animation.fillMode = kCAFillModeBoth
+        animation.removedOnCompletion = false
+        animation.duration = 1
+        return animation
+    }
     
-    func circleLayerSetup() {
-        let arcPath = UIBezierPath(arcCenter:CGPointMake(100,100), radius:40, startAngle: CGFloat(M_PI), endAngle: 0, clockwise: true)
+    var pathAnimation: CABasicAnimation {
+        let animation = basicAnimation
+        animation.keyPath = "strokeEnd"
+        return animation
+    }
+    
+    var leftPathAnimation: CABasicAnimation {
+        let animation = pathAnimation
+        animation.fromValue = leftPartLoadedLayer.strokeEnd
+        animation.toValue = leftLoadedState
+        return animation
+    }
+    
+    var rightPathAnimation: CABasicAnimation {
+        let animation = pathAnimation
+        animation.fromValue = rightPartLoadedLayer.strokeEnd
+        animation.toValue = rightLoadedState
+        return animation
+    }
+    
+    var colorAnimation: CABasicAnimation {
+        let animation = basicAnimation
+        animation.keyPath = "strokeAnimation"
+        return animation
+    }
+    
+    func leftBlockAnimation() {
+        CATransaction.begin()
+        let animation = leftPathAnimation
+        CATransaction.setCompletionBlock { [weak self] in
+            guard let strongSelf = self else { return }
+            if strongSelf.loadedState > 0.5 {
+                strongSelf.rightBlockAnimation()
+            }
+        }
+        leftPartLoadedLayer.strokeEnd = leftLoadedState
+        leftPartLoadedLayer.addAnimation(animation, forKey: animation.keyPath)
+        CATransaction.commit()
+    }
+    
+    func rightBlockAnimation() {
+        CATransaction.begin()
+        let pathAnimation = rightPathAnimation
         
-        let circleLayer = CAShapeLayer()
-        circleLayer.path = arcPath.CGPath
-        circleLayer.fillColor = UIColor.clearColor().CGColor
-        circleLayer.strokeColor = UIColor.blueColor().CGColor
-        circleLayer.lineWidth = 5.0;
         
-        circleLayer.strokeStart = 0
-        circleLayer.strokeEnd = 0.7
+        CATransaction.setCompletionBlock { [weak self] in
+            guard let strongSelf = self else { return }
+            if strongSelf.loadedState < 0.5 {
+                strongSelf.leftBlockAnimation()
+            }
+        }
+        let rightColorAnimation = colorAnimation
+        rightColorAnimation.fromValue = rightPartLoadedLayer.strokeColor
+        rightColorAnimation.toValue = fillLineColor
         
-        layer.addSublayer(circleLayer)
+        rightPartLoadedLayer.strokeEnd = rightLoadedState
+        rightPartLoadedLayer.strokeColor = fillLineColor
         
-        let arcPath2 = UIBezierPath(arcCenter:CGPointMake(100,100), radius:40, startAngle: CGFloat(M_PI), endAngle: 0, clockwise: true)
+        let animationGroup = CAAnimationGroup()
+        animationGroup.animations = [pathAnimation, rightColorAnimation]
+        animationGroup.duration = 1
         
-        let circleLayer2 = CAShapeLayer()
-        circleLayer2.path = arcPath2.CGPath
-        circleLayer2.fillColor = UIColor.clearColor().CGColor
-        circleLayer2.strokeColor = UIColor.redColor().CGColor
-        circleLayer2.lineWidth = 5.0;
+        rightPartLoadedLayer.addAnimation(animationGroup, forKey: "rightBlockAnimations")
         
-        circleLayer2.strokeStart = 0
-        circleLayer2.strokeEnd = 0.2
+        CATransaction.commit()
+        leftColorAnimation()
+    }
+    
+    func leftColorAnimation() {
+        CATransaction.begin()
+        let leftColorAnimation = colorAnimation
+        leftColorAnimation.fromValue = leftPartLoadedLayer.strokeColor
+        leftColorAnimation.toValue = fillLineColor
         
-        layer.addSublayer(circleLayer2)
+        leftPartLoadedLayer.strokeColor = fillLineColor
+        leftPartLoadedLayer.addAnimation(leftColorAnimation, forKey: "strokeColor")
         
-        let animation = CABasicAnimation(keyPath: "strokeEnd")
-        animation.fromValue = 0.2
-        animation.toValue = 0.6
-        animation.duration = 10 // duration is 1 sec
-        // 3
-        animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut) // animation curve is Ease Out
-        animation.fillMode = kCAFillModeBoth // keep to value after finishing
-        animation.removedOnCompletion = false // don't remove after finishing
-        // 4
-        
-        circleLayer2.strokeEnd = 0.6
-        circleLayer2.addAnimation(animation, forKey: animation.keyPath)
+        CATransaction.commit()
     }
 
 }

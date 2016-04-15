@@ -17,6 +17,7 @@
 		E80292D61CC0E68D00799F2D /* CircleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E80292D51CC0E68D00799F2D /* CircleViewController.swift */; };
 		E80292D81CC0E69A00799F2D /* PlotViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E80292D71CC0E69A00799F2D /* PlotViewController.swift */; };
 		E80292DA1CC0E6C000799F2D /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E80292D91CC0E6C000799F2D /* CircleView.swift */; };
+		E80292DC1CC119A900799F2D /* CircleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E80292DB1CC119A900799F2D /* CircleView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +55,7 @@
 		E80292D51CC0E68D00799F2D /* CircleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleViewController.swift; sourceTree = "<group>"; };
 		E80292D71CC0E69A00799F2D /* PlotViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlotViewController.swift; sourceTree = "<group>"; };
 		E80292D91CC0E6C000799F2D /* CircleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleView.swift; sourceTree = "<group>"; };
+		E80292DB1CC119A900799F2D /* CircleView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CircleView.xib; sourceTree = "<group>"; };
 		F36D8FEF7F284F007048F7DD /* Pods-TestGraphs.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TestGraphs.release.xcconfig"; path = "Pods/Target Support Files/Pods-TestGraphs/Pods-TestGraphs.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -119,6 +121,7 @@
 				E80292A71CC0DC4600799F2D /* AppDelegate.swift */,
 				E80292D51CC0E68D00799F2D /* CircleViewController.swift */,
 				E80292D91CC0E6C000799F2D /* CircleView.swift */,
+				E80292DB1CC119A900799F2D /* CircleView.xib */,
 				E80292D71CC0E69A00799F2D /* PlotViewController.swift */,
 				E80292AB1CC0DC4600799F2D /* Main.storyboard */,
 				E80292AE1CC0DC4600799F2D /* Assets.xcassets */,
@@ -262,6 +265,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E80292DC1CC119A900799F2D /* CircleView.xib in Resources */,
 				E80292B21CC0DC4600799F2D /* LaunchScreen.storyboard in Resources */,
 				E80292AF1CC0DC4600799F2D /* Assets.xcassets in Resources */,
 				E80292AD1CC0DC4600799F2D /* Main.storyboard in Resources */,
