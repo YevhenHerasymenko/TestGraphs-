@@ -11,7 +11,7 @@ import Charts
 
 class PlotViewController: UIViewController {
 
-    static let PointsCount = 30
+    static let PointsCount = 50
     
     @IBOutlet weak var lineChartView: LineChartView!
     
@@ -42,16 +42,34 @@ class PlotViewController: UIViewController {
         set.drawCirclesEnabled = false
         set.drawValuesEnabled = false
         
-        let gradientColors = [UIColor.grayColor().CGColor, UIColor.grayColor().CGColor, UIColor.redColor().CGColor, UIColor.redColor().CGColor]
+        set.drawCubicEnabled = true
+        
+        let gradientColors = [UIColor.lightGrayColor().CGColor, UIColor.lightGrayColor().CGColor, UIColor.redColor().CGColor, UIColor.redColor().CGColor]
         let gradient = CGGradientCreateWithColors(nil, gradientColors, [0.49, 0.495, 0.5, 1.0])
         
         set.fillAlpha = 1.0
         set.fill = ChartFill(linearGradient: gradient!, angle: 90)
         set.drawFilledEnabled = true
-        
+        set.highlightColor = UIColor.clearColor()
+        set.drawSteppedEnabled = false
         
         let dataSets = [set]
         let data = LineChartData(xVals: xVals, dataSets: dataSets)
+
+        lineChartView.descriptionTextColor = UIColor.clearColor()
+
+        lineChartView.leftAxis.axisLineColor = UIColor.clearColor()
+        lineChartView.leftAxis.labelTextColor = UIColor.clearColor()
+        lineChartView.leftAxis.gridColor = UIColor.clearColor()
+        lineChartView.rightAxis.gridColor = UIColor.clearColor()
+        lineChartView.xAxis.gridColor = UIColor.clearColor()
+        lineChartView.rightAxis.axisLineColor = UIColor.clearColor()
+        lineChartView.rightAxis.labelTextColor = UIColor.clearColor()
+        lineChartView.xAxis.labelTextColor = UIColor.clearColor()
+        lineChartView.xAxis.axisLineColor = UIColor.clearColor()
+        
+        lineChartView.xAxis.axisLineColor = UIColor.clearColor()
+        
         lineChartView.data = data
         
     }
