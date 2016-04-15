@@ -14,14 +14,16 @@ class CircleViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
     }
 
     @IBAction func animation(sender: AnyObject) {
-        circleView.loadedState = 0.9
+        circleView.loadedState = 0.1
     }
     
+    @IBAction func animationMid(sender: AnyObject) {
+        circleView.loadedState = 0.6
+    }
     @IBAction func animationMinus(sender: AnyObject) {
-        circleView.loadedState = 0.1
+        circleView.loadedState = 0.9
     }
 }

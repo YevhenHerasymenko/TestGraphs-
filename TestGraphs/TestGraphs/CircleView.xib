@@ -2,15 +2,35 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10116"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CircleView" customModule="TestGraphs" customModuleProvider="target">
+            <connections>
+                <outlet property="lineView" destination="gyS-6C-9qY" id="VJQ-aN-ZjM"/>
+                <outlet property="lineViewHeight" destination="Wbh-RL-fYt" id="u5G-qT-vPq"/>
+                <outlet property="view" destination="iN0-l3-epB" id="xa1-14-E3A"/>
+            </connections>
+        </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB">
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gyS-6C-9qY">
+                    <rect key="frame" x="299" y="0.0" width="3" height="20"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="20" id="Wbh-RL-fYt"/>
+                        <constraint firstAttribute="width" constant="3" id="eVq-u4-iJD"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="gyS-6C-9qY" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Voo-6s-gqT"/>
+                <constraint firstItem="gyS-6C-9qY" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="qIk-bP-Kfo"/>
+            </constraints>
         </view>
     </objects>
 </document>

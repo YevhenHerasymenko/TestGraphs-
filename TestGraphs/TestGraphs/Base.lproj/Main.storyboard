@@ -54,8 +54,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l2X-7p-RNa">
-                                <rect key="frame" x="262" y="506" width="76" height="30"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="l2X-7p-RNa">
+                                <rect key="frame" x="231" y="506" width="138" height="30"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vtN-4w-0fs">
                                         <rect key="frame" x="0.0" y="0.0" width="46" height="30"/>
@@ -63,45 +63,49 @@
                                             <constraint firstAttribute="height" constant="30" id="fQ7-OZ-6BZ"/>
                                             <constraint firstAttribute="width" constant="46" id="lg0-32-YOm"/>
                                         </constraints>
-                                        <state key="normal" title="+"/>
+                                        <state key="normal" title="Min"/>
                                         <connections>
                                             <action selector="animation:" destination="M4g-JU-AON" eventType="touchUpInside" id="aP8-J8-wsV"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zga-3H-DHi">
+                                        <rect key="frame" x="46" y="0.0" width="46" height="30"/>
+                                        <state key="normal" title="Mid"/>
+                                        <connections>
+                                            <action selector="animationMid:" destination="M4g-JU-AON" eventType="touchUpInside" id="Yq6-bI-2ZF"/>
+                                        </connections>
+                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HBm-bp-dlR">
-                                        <rect key="frame" x="46" y="0.0" width="30" height="30"/>
-                                        <state key="normal" title="-"/>
+                                        <rect key="frame" x="92" y="0.0" width="46" height="30"/>
+                                        <state key="normal" title="Max"/>
                                         <connections>
                                             <action selector="animationMinus:" destination="M4g-JU-AON" eventType="touchUpInside" id="uOp-xY-Lrc"/>
                                         </connections>
                                     </button>
                                 </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="76" id="gGa-4n-k3Y"/>
-                                </constraints>
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zw8-qF-cCa" customClass="CircleView" customModule="TestGraphs" customModuleProvider="target">
-                                <rect key="frame" x="200" y="250" width="200" height="100"/>
+                                <rect key="frame" x="200" y="225" width="200" height="150"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="200" id="SqR-WS-W4a"/>
-                                    <constraint firstAttribute="height" constant="100" id="bjz-ci-Ck5"/>
+                                    <constraint firstAttribute="height" constant="150" id="bjz-ci-Ck5"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="lineWidth">
                                         <real key="value" value="20"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="strokeFullColor">
-                                        <color key="value" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="strokeLoadedColor">
-                                        <color key="value" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="value" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="strokeLessLoadedColor">
-                                        <color key="value" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="value" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="strokeFullLoadedColor">
                                         <color key="value" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="strokeMidLoadedColor">
+                                        <color key="value" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
